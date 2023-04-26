@@ -1,26 +1,37 @@
 import { useEffect } from "react";
 import request from "../tools/request";
 import Card from "../utils/Card";
-import { useDispatch, useSelector } from 'react-redux'
-import { setPerson } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { setPersons } from "../redux/actions";
+import { Col, Row } from "antd";
+import Table from "../utils/Table";
 
 export default function Home() {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+  const persons = useSelector((s) => s?.persons);
 
-    const person = useSelector(s => s?.person)
+  useEffect(() => {
+    request("/users").then(({ data }) => {
+      data.length = 6;
+      dispatch(setPersons(data));
+    });
+  }, []);
 
-    useEffect(() => {
-        request('/users/1')
-        .then(({ data }) => dispatch(setPerson(data)))
-    },[])
-    
   return (
     <div>
-        <Card id={1} person={person} />
-        <Card id={2} person={person} />
-        <Card id={3} person={person} />
-        <Card id={4} person={person} />
+      <Row>
+        <Col span={5}>
+          <ul>
+            {persons.map((person) => (
+              <Card key={person.id} person={person} personId={person.id} />
+            ))}
+          </ul>
+        </Col>
+        <Col span={19}>
+          <Table />
+        </Col>
+      </Row>
     </div>
   );
 }

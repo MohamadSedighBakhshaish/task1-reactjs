@@ -1,8 +1,9 @@
 import {combineReducers} from '@reduxjs/toolkit'
-import { person } from './person'
+import { persons, tablePerson } from './persons'
 
 const reducer = combineReducers({
-    person
+    persons,
+    tablePerson
 })
 
 export default reducer;
