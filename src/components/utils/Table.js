@@ -27,7 +27,7 @@ export default function Table() {
       title: "Action",
       dataIndex: "",
       key: "id",
-      render: (field, record) => (
+      render: (_, record) => (
         <a
           key={record.id}
           onClick={(e) => {
