@@ -1,3 +1,5 @@
+import uniq from 'lodash/uniq'
+
 export function persons(state = [], action) {
   switch (action.type) {
     case "PERSONS":
@@ -10,7 +12,7 @@ export function persons(state = [], action) {
 export function tablePerson(state = [], action) {
   switch (action.type) {
     case "ADD_PERSONS":
-      return [...state, action.payload];
+      return uniq([...state, action.payload]);
     case "DELETE_PERSONS":
       return state?.filter((person) => person.id !== action.payload)
     default:
