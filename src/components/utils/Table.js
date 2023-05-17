@@ -41,5 +41,5 @@ export default function Table() {
     },
   ];
 
-  return <AntTable columns={columns} dataSource={tablePerson} size="small" />;
+  return <AntTable columns={columns} dataSource={tablePerson} size="small" pagination={false}/>;
 }
